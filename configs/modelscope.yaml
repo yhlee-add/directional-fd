@@ -1,0 +1,12 @@
+model_name: ModelScopeModel
+model_kwargs:
+  model_key: ali-vilab/text-to-video-ms-1.7b
+  target: accelerator
+solver_name: PipeDefaultSolver
+solver_kwargs:
+  num_inference_steps: 25
+dataset_name: UCF101
+num_samples: 2048
+batch_size: 8
+path: samples/modelscope
+metric_name: FVD

@@ -1,0 +1,86 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "core"
+version = "0.1.0"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "accelerate",
+    "diffusers[torch]",
+    "transformers<4.55",
+    "datasets>=2.20",
+    "clean-fid",
+    "torchmetrics[image]",
+    "torch-fidelity",
+    "opencv-python-headless",
+    "sacred",
+    "pymongo",
+    "pyyaml",
+    "pyrallis",
+    "image-reward",
+    "esm==3.2.1.post1",
+    "appdirs",
+    "clip @ git+https://github.com/openai/CLIP.git",
+    "sentencepiece",
+    "greenlet",
+    "numpy<2",
+    "pandas",
+    "pillow",
+    "tqdm",
+    "matplotlib",
+    "scikit-learn",
+    "scikit-image",
+    "scipy",
+    "soundfile",
+    "frechet_audio_distance",
+    "cd-fvd",
+    "av",
+    "resampy",
+    "torchcodec==0.9.1",
+    "absl-py",
+    "yacs",
+    "aiohttp",
+    "aiojobs",
+    "torch==2.9.0",
+    "torchvision==0.24.0",
+    "torchaudio==2.9.0",
+    "flask>=3.1.3",
+    "hatchling>=1.29.0",
+    "editables",
+    "flash-attn",
+    "einops==0.8.1",
+    "ninja>=1.13.0",
+    "pyqt6",
+    "statsmodels",
+    "pytest",
+    "smbprotocol",
+    "jvp_flash_attention",
+    "imagecorruptions",
+    "black",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/core"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.uv]
+override-dependencies = [
+    "timm>=0.9,<=1.0.12",
+    "transformers==4.54.1"
+]
+
+[tool.uv.sources]
+flash-attn = { path = "./flash_attn-2.8.3+cu128torch2.9-cp310-cp310-linux_x86_64.whl" }
+
+# imagecorruptions declares opencv-python; drop it so it uses the headless cv2
+# already installed rather than pulling in a clashing second OpenCV.
+[[tool.uv.dependency-metadata]]
+name = "imagecorruptions"
+version = "1.1.2"
+requires-dist = ["numpy", "scipy", "scikit-image", "pillow"]
+
+

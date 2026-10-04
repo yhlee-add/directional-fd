@@ -1,0 +1,12 @@
+model_name: StableDiffusionModel
+model_kwargs:
+  model_key: stable-diffusion-v1-5/stable-diffusion-v1-5
+  target: accelerator
+solver_name: HuggingFaceSolver
+solver_kwargs:
+  model_key: stable-diffusion-v1-5/stable-diffusion-v1-5
+  scheduler: DDIMScheduler
+  num_inference_steps: 50
+batch_size: 5
+path: samples/sd1.5
+metric_name: CLIPScore

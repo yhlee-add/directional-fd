@@ -1,0 +1,55 @@
+[project]
+name = "laproteina-env"
+version = "0.0.0"
+requires-python = ">=3.10"
+
+# La-Proteina's environment.yaml pip deps (its conda-only mmseqs2 is eval-only and
+# dropped; transformers moves here from the conda channels). torch is pinned to the
+# cu118 build so installing these deps can't re-resolve it to a newer default-CUDA
+# wheel; graphein (--no-deps) and the PyG wheels are installed separately in the
+# Dockerfile since they need custom sources.
+dependencies = [
+    "torch==2.7.0",
+    "torchvision==0.22.0",
+    "torchaudio==2.7.0",
+    "python-dotenv==1.0.1",
+    "einops==0.6",
+    "dm-tree==0.1.8",
+    "lightning==2.5.0",
+    "loguru==0.7.2",
+    "hydra-core==1.3.1",
+    "numpy==1.23.5",
+    "pandas==2.3.0",
+    "biopandas==0.5.1",
+    "wandb==0.17.0",
+    "wget==3.2",
+    "tqdm==4.66.4",
+    "ml-collections==0.1.1",
+    "jaxtyping",
+    "loralib",
+    "biopython",
+    "biotite>=0.41.0",
+    "cpdb-protein==0.2.0",
+    "pre-commit>=4.0.0",
+    "joblib==1.4.2",
+    "rich==14.0.0",
+    "deepdiff>=8.6.1",
+    "multipledispatch",
+    "plotly",
+    "pydantic",
+    "rich-click",
+    "scikit-learn",
+    "seaborn",
+    "xarray",
+    "transformers==4.48.3",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu118" }
+torchvision = { index = "pytorch-cu118" }
+torchaudio = { index = "pytorch-cu118" }
+
+[[tool.uv.index]]
+name = "pytorch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true
